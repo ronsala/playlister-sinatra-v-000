@@ -1,0 +1,10 @@
+<form action="/songs/<%= @song.slug %>" method="POST">
+  <input type="hidden" name="_method" value="patch">
+<h1><%= @song.name%>"></h1><br>
+
+ <label>New Artist:</label>
+ <input type="text" id="Artist Name" name="Artist Name"><br>
+
+<input type="submit" value="Save">
+  
+</form>
