@@ -2,8 +2,9 @@ class SongsController < ApplicationController
 
   get "/songs/:slug" do
     @song = Song.find_by_slug(params[:slug])
-    # @artist = @song.artist
-    # # binding.pry
+    artist_id = @song.artist_id
+    @artist = Artist.find(artist_id)
+    # binding.pry
     # genre = @song.song_genres.ids[0]
     # @genre = Genre.find_by_id(genre).name
 
@@ -30,7 +31,6 @@ class SongsController < ApplicationController
   end
 
   post "/songs" do
-    binding.pry
     @song = Song.create(name: params[:name])
     params[:genre_ids].each do |id|
       @song.genres << Genre.find_by_id(id)
