@@ -63,9 +63,11 @@ class SongsController < ApplicationController
     #   @artist.save
     # end
 
-      # @artist = Artist.find_or_create_by(:name => params[:artist_name])
-      # # binding.pry
-      # @song.artist << @artist
+    unless params[:artist_name].empty?
+      @artist = Artist.find_or_create_by(:name => params[:artist_name])
+      # binding.pry
+      @song.artist << @artist
+    end
 
     params[:genres].each do | g |
       # binding.pry
