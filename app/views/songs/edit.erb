@@ -6,15 +6,15 @@
   <input type="hidden" name="_method" value="patch">
 
 <label>Edit Song:</label>
- <input type="text" id="Name" name="song_name" value=""><br>
+ <input type="text" id="Name" name="song_name" value="<%= @song.name%>"><br>
 
  <label>Edit Artist:</label>
- <input type="text" id="Artist Name" name="artist_name"><br>
+ <input type="text" id="Artist Name" name="artist_name" value="<%= @song.artist.name%>"><br>
 
  <label>Edit Genres</label><br>
  <%@genres.each do |g|%>
     <label><%= g.name %></label>
-    <input type="checkbox" name="genres[]" value="<%= g.id %>" id="<%= g.name %>"><br>
+    <input type="checkbox" name="genres[]" value="<%= g.id %>" id="<%= g.name %>" <%= "checked" if @song.genres.include?(g)%>><br>
 <% end %><br>
 
 <input type="submit" value="Save">

@@ -49,7 +49,7 @@ class SongsController < ApplicationController
 
   patch '/songs/:slug' do
    @song = Song.find_by_slug(params[:slug]) 
-    # binding.pry
+    # binding.pry #<Song:0x007fd0cf2b8390 id: 1, name: "That One with the Guitar", artist_id: 1>
     unless params[:song_name].empty?
 
       @song.update(:name => params[:song_name])
@@ -65,7 +65,7 @@ class SongsController < ApplicationController
     unless params[:artist_name].empty?
       @artist = Artist.find_or_create_by(:name => params[:artist_name])
       # binding.pry
-      @song.artist << @artist
+      @song.artist = @artist
     end
 
     if !params[:genres].empty?
