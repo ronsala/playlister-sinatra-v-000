@@ -1,8 +1,4 @@
-# require 'rack-flash'
-
 class SongsController < ApplicationController
-
-  # use Rack::Flash
 
   get "/songs" do
     @songs = Song.all
@@ -18,14 +14,11 @@ class SongsController < ApplicationController
   get "/songs/:slug/edit" do
     @song = Song.find_by_slug(params[:slug])
     @genres = Genre.all
-    # binding.pry
     erb :'songs/edit'
   end
 
   get "/songs/:slug" do
     @song = Song.find_by_slug(params[:slug])
-    # binding.pry
-
     erb :'songs/show'
   end
 
@@ -49,28 +42,18 @@ class SongsController < ApplicationController
 
   patch '/songs/:slug' do
    @song = Song.find_by_slug(params[:slug]) 
-    # binding.pry #<Song:0x007fd0cf2b8390 id: 1, name: "That One with the Guitar", artist_id: 1>
     unless params[:song_name].empty?
 
       @song.update(:name => params[:song_name])
     end
 
-    # unless params[:artist_name].empty?
-    #   # binding.pry
-    #   @artist = Artist.find_or_create_by(:name => params[:artist_name])
-    #   @artist.songs << @song
-    #   @artist.save
-    # end
-
     unless params[:artist_name].empty?
       @artist = Artist.find_or_create_by(:name => params[:artist_name])
-      # binding.pry
       @song.artist = @artist
     end
 
     if !params[:genres].empty?
     params[:genres].each do | g |
-      # binding.pry
       genre = Genre.find(g)
       if !@song.genres.include?(genre)
         @song.genres << genre
