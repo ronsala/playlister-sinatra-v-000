@@ -55,10 +55,13 @@ class SongsController < ApplicationController
       # binding.pry
       @song.update(:name => params[:song_name])
     end
-    
-    @artist = Artist.find_or_create_by(:name => params[:artist_name])
-    @artist.songs << @song
-    @artist.save
+
+    unless params[:artist_name].empty?
+      # binding.pry
+      @artist = Artist.find_or_create_by(:name => params[:artist_name])
+      @artist.songs << @song
+      @artist.save
+    end
 
     params[:genres].each do | g |
       # binding.pry
