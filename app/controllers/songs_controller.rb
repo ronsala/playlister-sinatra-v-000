@@ -36,14 +36,18 @@ class SongsController < ApplicationController
     @artist.save
     @song.save
 
+    # binding.pry # @session => nil
+
     # flash[:message] = "Successfully created song."
+    # flash.message = "Successfully created song."
+    # binding.pry
     redirect to "/songs/#{@song.slug}"
   end
 
   patch '/songs/:slug' do
    @song = Song.find_by_slug(params[:slug]) 
-    unless params[:song_name].empty?
 
+    unless params[:song_name].empty?
       @song.update(:name => params[:song_name])
     end
 
@@ -53,13 +57,14 @@ class SongsController < ApplicationController
     end
 
     if !params[:genres].empty?
-    params[:genres].each do | g |
-      genre = Genre.find(g)
-      if !@song.genres.include?(genre)
-        @song.genres << genre
+      params[:genres].each do | g |
+        genre = Genre.find(g)
+        if !@song.genres.include?(genre)
+          @song.genres << genre
+        end
       end
     end
-  end
+
     @song.save
     # flash[:message] = "Successfully updated song."
     redirect to "/songs/#{@song.slug}"

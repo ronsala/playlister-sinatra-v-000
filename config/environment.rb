@@ -4,6 +4,10 @@ require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/base'
 # require 'rack-flash'
+# require 'rack-flash3'
+require 'sinatra/flash'
+register Sinatra::Flash
+
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
 ActiveRecord::Base.establish_connection(
