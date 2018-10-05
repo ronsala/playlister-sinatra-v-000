@@ -25,7 +25,7 @@ class SongsController < ApplicationController
   post "/songs" do
     
     @song = Song.create(name: params[:Name])
-    
+    # binding.pry
     params[:genres].each do |id|
       @song.genres << Genre.find_by_id(id)
     end
@@ -38,7 +38,7 @@ class SongsController < ApplicationController
 
     # binding.pry # @session => nil
 
-    # flash[:message] = "Successfully created song."
+    flash[:message] = "Successfully created song."
     # flash.message = "Successfully created song."
     # binding.pry
     redirect to "/songs/#{@song.slug}"
