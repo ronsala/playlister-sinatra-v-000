@@ -8,12 +8,6 @@ class ApplicationController < Sinatra::Base
     set :views, Proc.new { File.join(root, "../views/") }
   end
 
-  helpers do
-    def flash
-      @flash ||= FlashMessage.new(session)
-    end
-  end
-
   get '/' do
     erb :index
   end
